@@ -1,0 +1,244 @@
+\documentclass{sig-alternate}
+ 
+
+
+
+% Use this command to override the default ACM copyright statement (e.g. for preprints).
+% Consult the conference website for the camera-ready copyright statement.
+
+
+%% EXAMPLE BEGIN -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+ %\toappear{Permission to make digital or hard copies of all or part of this work for personal or classroom use is 	granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. \\
+% {\emph{BuildSys'16}}, Nov 16--17, 2014, Stanford,California USA. \\
+% Copyright \copyright~2016 ACM ISBN/14/04...\$15.00. \\
+% DOI string from ACM form confirmation}
+%% EXAMPLE END -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+
+
+% Arabic page numbers for submission.
+% Remove this line to eliminate page numbers for the camera ready copy
+\pagenumbering{arabic}
+
+
+% Load basic packages
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead
+\usepackage{times}    % comment if you want LaTeX's default font
+\usepackage{url}      % llt: nicely formatted URLs
+\usepackage{epic,epsfig}
+\usepackage{wrapfig}
+ 
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages,
+% to give it a fighting chance of not being over-written,
+% since its job is to redefine many LaTeX commands.
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+pdftitle={SIGCHI Conference Proceedings Format},
+pdfauthor={LaTeX},
+pdfkeywords={SIGCHI, proceedings, archival format},
+bookmarksnumbered,
+pdfstartview={FitH},
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black,
+breaklinks=true,
+}
+
+% create a shortcut to typeset table headings
+\newcommand\tabhead[1]{\small\textbf{#1}}
+
+
+% End of preamble. Here it comes the document.
+\begin{document}
+ 
+
+%\title{Activity-Aware Identification of Fine-grained Appliance Usage for Green Buildings}
+\title{Leakage Detection}
+\numberofauthors{3}
+\author{
+  \alignauthor Nilavra Pathak\\
+    \affaddr{Information Systems}\\
+    \affaddr{University of Maryland Baltimore County}\\
+    \email{nilavra1@umbc.edu}\\ 
+    %\affaddr{Optional phone numbe00r} 
+}
+
+\maketitle
+
+\begin{abstract}
+The structural insulation artifacts of a building play a critical role on the overall building HVAC (Heating ventilation and Air-Conditioning) consumption. While the effective utilization of a multitude of appliances help reduce the building energy consumption, equally corrective actions and timely precautions on poor insulations surrounding the air leakages of windows and doors, damps on the walls and ceilings play a critical role on increasing the efficiency of HVAC system and reducing the utility bill significantly. In this paper, we investigate the volatile temperature distributions inside the room in presence of damped walls and air leakages around the windows and doors. We prototype a low-cost low-energy IR camera based system to scan and detect the persistent air-leakages and damps. We investigate the impact of those unseen energy holes on the efficiency of HVAC system and building overall energy consumption patterns. Our preliminary results based on real data traces help quantify the significant improvement, both in terms of improving the efficiency of HVAC system and reducing the building energy footprint.
+\end{abstract}
+
+
+\category{H.5.0}{Information Interfaces and Presentation}{General}
+
+\keywords{Energy, HVAC, Heat Loss, Green Building, Pervasive Sensing, Context}
+\section{Introduction}
+
+ \indent Building structure, openings and leakages have direct effect on the heating and cooling of homes. Often it has been found that the utility bill is exorbitantly high. Maryland has one of the highest bills in USA~\cite{EIA2014}, where in Maryland average consumption was about \$140. Typically utility costs go up in winter and mostly during bouts of bitter cold when more people are likely to stay indoors. Times like the winter storm which disrupted may result in families to stay indoors for more number of days resulting an increase in consumption. As such proper heating in the house is a requisite and minimizing the heat loss is necessary to reduce utility bills. {\bf Motivate more}
+ 
+ \indent Temperature varies within a house. It is possible for bigger houses with multiple floors to have stark differences in temperature in various parts this is primarily because of faulty ducts which distribute the heat, poor insulation, infiltration which may be because of any opening and improper sealing which may cause, dirty air filter that restricts airflow, not letting home get enough hot/cool air, open windows through which conditioned air can flow out leaving uneven temperatures in the home. 
+
+\indent Open windows are one of the big reasons for improper heating or cooling. Open windows mean that heaters or air-conditioners run for longer times hence increasing resulting in bigger bills. Deploying door sensors are a good way of finding out whether doors or windows are opened or not, but it increases the deployment cost. 
+
+\indent In this paper we propose a method of detecting open doors or windows or possible wall openings using infrared camera (IR camera). The advantage of a IR camera is that it can monitor continuously temperature of any surface.  
+ 
+   \indent The outline of the work is as follows - 
+
+\begin{itemize}
+
+\item {\bf Heat Loss model:} Creating a heat loss/gain model for rooms and buildings based on the internal and external temperatures, and number of windows and doors openings.
+
+\item {\bf Heat-model and energy relation:} Find a relation between energy consumption of heaters/coolers and the building heat loss/gain model. 
+
+\item {\bf Energy to Heat loss/gain model:}  Use energy consumption of HVAC/heaters/coolers of unseen rooms/buildings to find their heat model. 
+
+\end{itemize}
+
+
+\section{Related Works}
+
+ \indent Modeling building heat dynamics is key to better control of HVAC systems. Before characterizing the different approaches to modeling residential heating the types of heating or cooling systems need to be explored. Then we look into different building heat models.
+ 
+\subsection{Heating or Cooling Systems} 
+
+
+ \indent Heating or Cooling systems can be broadly classified into two types - Centralized and Direct. Centralized Systems provide heating or cooling throughout the homes while direct heating or cooling are designed to warm or cool living space directly from the devices.
+    
+\subsubsection{Centralized Heating Systems} 
+    
+    
+ 
+\begin{enumerate}
+\item Furnaces : This is the most common heating system for North American Households which is fueled by gas, electricity or oil. Heating capacity of a furnace is measured using BTU(British Thermal Unit) with an average of 40000-130000 BTU. Fuel is burned to heat the air which is drawn in and sends it through the homes vents and heat the rooms while a second air flow system draws in the return air to send it back into the burner assembly. The wall thermostat regulates the heating cycles, which stops heating if the temperature in a central zone crosses the set threshold. 
+
+\item Boilers: Unlike furnaces, boilers distribute heat in hot water which gives up heating while passing through radiators and cooler water then returns for reheating. Steam boilers on the other hand (less common) carries heat through the house, condensing to water in the radiators as it cools. Oil and natural gas is generally used to heat the water. Boiler uses a pump to circulate hot water through pipes to radiators. 
+
+\item Heat Pumps: Heat pumps can be used for both heating and cooling. During heating mode a routing valve known as the Reversing Valve reroutes the refrigerant path thereby making the outside coil function as the evaporator and the indoor coil as the condenser. The heat absorbed from the outside air by the evaporator then brought inside and released by the condenser to heat the home's air, also the outdoor expansion valve is active as the indoor expansion valve is bypassed. This is an efficient method of heating the home however in order for the evaporator now outside to absorb heat it must operate at temperatures lower than the outside air which results in frosting hence the need of defrosting, during which auxilary heat is activated during defrost cycle. 
+\end{enumerate} 
+ 
+\subsubsection{Centralized Cooling Systems} 
+
+ Central Air Conditioners and Heat Pumps are designed to cool the entire house. In the hotter season the compressor receives the cool low pressure refrigerant vapor it then pumps this vapor into the high-pressure section of the system. This hot high pressure gas is passed through a routing valve known as the Reversing Valve to the outside coils which functions as the condenser. In the condenser the heat is removed by the outdoor fan causing the refrigerant to condense into a liquid. The liquid refrigerant then bypasses the first expansion valve by means of one-direction valves known as check valves. The cooler but high pressure liquid travels along the liquid line to the indoor unit where it is forced through the expansion valve which partially restricts the flow of refrigerant creating the needed decrease in pressure which allows the refrigerant to start evaporating. As the refrigerant evaporates it absorbs heat from the passing air, in addition the cold evaporator collects moisture which provides dehumidification for the home, the refrigerant then travels back to the compressor and the process is repeated.  
+   
+\subsubsection{Direct Heating Systems}
+
+\begin{enumerate}
+
+\item Electric Space Heaters: Although there are many different types of direct heating systems the most popular ones are portable plug in electric space heaters. When it is turned on, the ceramic plates inside are heated and a fan blows air through the plates which heats a room.
+
+\item Oil filled radiator heaters:  are filled with a special oil which never needs to be refilled. They take more time to heat but keeps the heat for longer time, less noisy and more energy efficient. 
+\end{enumerate} 
+\subsubsection{Direct Cooling Systems}
+
+\begin{enumerate}
+\item Room air conditioners : are available for mounting in windows or through walls, but in each case they work the same way, with the compressor located outside. Room air conditioners are sized to cool just one room, so a number of them may be required for a whole house. Individual units cost less to buy than central systems.
+
+\item Ductless Mini-Split Air Conditioners: Mini-split systems, very popular in other countries, can be an attractive retrofit option for room additions and for houses without ductwork, such as those using hydronic heat (see the heating section). Like conventional central air conditioners, mini-splits use an outside compressor/condenser and indoor air handling units. The difference is that each room or zone to be cooled has its own air handler. Each indoor unit is connected to the outdoor unit via a conduit carrying the power and refrigerant lines. Indoor units are typically mounted on the wall or ceiling. The major advantage of a ductless mini-split is its flexibility in cooling individual rooms or zones. By providing dedicated units to each space, it is easier to meet the varying comfort needs of different rooms. By avoiding the use of ductwork, ductless mini-splits also avoid energy losses associated with central forced-air systems. 
+
+\item Evaporative Coolers: This type of coolers work by vaporizing water which is added in the cooler. These are also known as desert coolers as it works better in dry and hot weathers and evaporative cooling differs from typical air conditioning systems. The temperature of dry air can be dropped significantly through the phase transition of liquid water to water vapor (evaporation), which can cool air using much less energy than refrigeration.
+\end{enumerate}
+ 
+
+\subsection{Building Heat Dynamics Models} 
+
+   The knowledge of the heating or cooling system is a precursor to the modeling of the heat dynamics of a building. In this part, past researches on modeling heat dynamics and integration with HVAC systems have been reviewed to review the state of the art. 
+
+\subsubsection{Centralized Heating/Cooling systems and whole building heat dynamics modeling}
+
+\indent Building heat modeling can be done in two different ways - deterministic modeling and grey-box modeling~\cite{Model}. A deterministic model is a theoretical model which considers which considers knowledge regarding the entities of the system for example the size of rooms or buildings, indoor temperatures 
+
+
+
+\subsubsection{Decentralized Heating/Cooling systems and zonal heat dynamics modeling}
+
+\indent Determining zonal (room/local space level) heat models is important for better control of local heaters and coolers. In~\cite{HomeAC} a feedback system PACMAN has been designed, that predicts AC consumption based on local temperature sensor data from different parts of a room. A single room's thermal model has been created by using Kalman filters in a stochastic greybox modeling approach, in~\cite{Kalman}, where the input to the system are room temperature and occupancy. In a greybox testing, partial prior knowledge of the system is assumed that include - use of underfloor heating, binary status of heating , indoor air temperature and presence of considerable process noise and has no knowledge of - the heater output, floor and house envelope temperature, thermal capacities and resistance of the walls and the room layout. Here three models have been proposed - Single-Box Model, Underfloor Heating Model, Underfloor and Envelope Model and finally a Complete Model. The first model simply considers the transfer of heat is directly from heater to indoor air which finally leads leaks outside. The later two models considers the floor as an additional heat loss medium and then the whole envelope as a loss medium. Finally the Complete model adds all the previous and adds solar irradiation in the equations. Similar approach has been taken in~\cite{AdaHeat} where an intelligent domestic heating agent system - ADAHEAT, has been developed that balances heating cost and use similar modeling using Extended Kalman filters. 
+ 
+
+Preheat 
+
+SPOT+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          ##################################            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Method}
+
+
+\begin{itemize} 
+\item Deploy temperature sensors/IR camera in rooms to come across a heating model.
+
+\item Check heater cycles and temperature.
+
+
+\end{itemize}
+
+\section{Current Challenges}
+
+ This sections are detailed problems being encountered. It is not going to be a part of draft rather a note on the recent updates. 
+
+\begin{itemize} 
+\item Battery drains from multisensors if polling rate is even per minute basis(Which can motivate IR usage) . Although this is for ground truth purposes its causing a bit of a problem with connectivity when the hub is downstairs.
+
+\item  IR camera yet doesn't have the rotating feature. Hence has to be fixed. As such it neither has a proper stand which can be used.
+
+\item IR Calibration is a problem and it has to be done manually.
+
+\item IR camera needs a windows machine it will be better to get a rasp pi along with it. Recent IOT version of windows 10 has a rasp pi version which I have to try out yet. 
+
+\item Room and wall temperature relation
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{EIA2014} 
+ EIA 2014  http://www.eia.gov/electricity/sales$\_$revenue$\_$price/pdf/table5$\_$a.pdf, 2014. 
+  
+\bibitem{Model} Klaus Kaae Andersen, Henrik Madsen, Lars H. Hansen, Modelling the heat dynamics of a building using stochastic differential equations, Energy and Buildings, Volume 31, Issue 1, January 2000, Pages 13-24.
+
+
+\bibitem{HomeAC} M. Jain, A. Singh and V. Chandan, Non-intrusive estimation and prediction of residential AC energy consumption, 2016 IEEE International Conference on Pervasive Computing and Communications (PerCom), Sydney, NSW, 2016, pp. 1-9.
+
+
+\bibitem{Kalman}  M. Alam, A. A. Panagopoulos, A. Rogers, N. R. Jennings, and J. Scott. Applying extended kalman filters to adaptive thermal modelling in homes: Poster abstract. In Proceedings of the 1st ACM Conference on Embedded Systems for Energy-Efficient Buildings, BuildSys 2014.
+
+\bibitem{AdaHeat} Panagopoulos, Athanasios Aris, Alam, Muddasser, Rogers, A. and Jennings, N.R.  (2015)  AdaHeat: A general adaptive intelligent agent for domestic heating control. In,  14th International Conference on Autonomous Agents and Multi-Agent Systems,  Istanbul, TR,  04 - 08 May 2015.  , 1295-1303.     
+
+\bibitem{SPOT} P. X. Gao and S. Keshav. SPOT: A Smart Personalized Office Thermal Control System. In Proc. ACM e-Energy ’13, 2013.
+
+\bibitem{SPOT+} P. X. Gao and S. Keshav. Optimal Personal Comfort Management Using SPOT+. In Proceedings of the Fifth ACM Workshop on Embedded Systems For Energy-Efficient Buildings, pages 1–8. ACM, 2013. 
+
+\bibitem{PREHEAT} J. Scott, A. Bernheim Brush, J. Krumm, B. Meyers, M. Hazas, S. Hodges, and N. Villar. Preheat: Controlling home heating using occupancy prediction. In Proceedings of the Thirteenth ACM International Conference on Ubiquitous computing. ACM, 2011.
+
+\bibitem{ROGERS} A. Rogers, S. Ghosh, R. Wilcock, and N. R. Jennings. A scalable lowcost solution to provide personalised home heating advice to households. In Proceedings of the Fifth ACM Workshop on Embedded Systems For Energy-Efficient Buildings, pages 1–8. ACM, 2013.
+
+\bibitem{wallroom} Sen, M., 2012. Effect of walls on synchronization of thermostatic room-temperature oscillations. In Proceedings of the Mexican Society of Mechanical Engineers (SOMIM), Sept. 19-21, 2012, Salamanca, Gto., Mexico. 
+
+\bibitem{wallroom2}  Sen, Mihir, et al. Dynamics of air and wall temperatures in multiroom buildings. ASME 2012 International Mechanical Engineering Congress and Exposition. American Society of Mechanical Engineers, 2012.
+
+
+\end{thebibliography}
+
+\end{document}
