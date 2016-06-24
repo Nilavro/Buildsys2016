@@ -1,0 +1,24 @@
+\section{Introduction}
+
+ \indent Building structures, openings and leakages have direct effect on the heating and cooling of homes. Often it has been found that the utility bill is exorbitantly high. Maryland has one of the highest bills in USA~\cite{EIA2014}, where the average monthly utility bill is about \$140. Typically utility costs go up in winter and mostly during bouts of bitter cold when more people are likely to stay indoors HVAC usage spikes up. Times like the winter storm which disrupts may result in families to stay indoors for more number of days hence increasing utility consumption. As such proper heating in the house is a requisite and minimizing the heat loss is necessary to reduce utility bills and also for comfort. Structural openings and leakages can result in uneven thermal pockets in a room or house. Slight openings in doors and windows can be major reasons for heat leakages which can be detected using thermal imagery. Apart from that infrared building diagnosis provides detection of - water leaks and their origin - walls, flooring, roof; plumbing issues like blockages; electrical "hot spots" which can cause potential fire hazards; Pest \& rodent nests; Moisture that cannot be physically reached with moisture meters; HVAC problem areas - loose, ill-fitting or disconnected fittings. However diagnosis providers or self-diagnosis using IR cameras needs manual searching of leakages and uses expensive thermal imaging devices.
+
+ \indent Our system description is somewhat similar to SPOT+~\cite{SPOT,SPOT+} although our intention and the hardware is completely different. The SPOT system consist of a Kinect sensor, a Infrared Sensor and servo motor, along with environment sensors as the main objective of the system is occupancy based comfort management. The system is described as - "\textit{ When a worker enters the work space, the Kinect tracks the worker and sends a skeleton stream to the PC. The PC finds the location of the worker's body center and calculates the rotation angle of the servos. It then communicates with the micro-controller to adjust the angle of the two servos so that the infrared sensor is facing the body center. When the tracked worker is moving, the infrared sensor may not be actually facing towards the worker. Therefore, we introduce a 0.5 second measurement delay into the system. That is, the infrared sensor starts collecting data only when the worker has been standing still for at least 0.5s. The system then estimates the clothing insulation by the clothing surface temperature ..}".
+
+\indent Technical Questions: Our investigations in this paper address the following technical questions:
+ \begin{itemize}
+ \item The commercially available imaging systems are expensive and range from \$250 upwards upto almost \$40000. Although such an expensive system is not necessary even the ones on low range are expensive. The IR research module also has an expensive board which cost \$170.
+
+ \item We use an IR camera having a coarse resolution of 16 $\times$ 4 pixels. Calibration with the digital camera is a challenge and ground truth evaluation is difficult. From such a coarse resolution thermal image it is difficult to interpret what camera actually captures.
+
+ \item The system in SPOT+ has a Kinect and IR sensor together. As such the system is quite cumbersome and not suitable for portable deployment. Also the cost goes high up with the Kinect attached.
+ \end{itemize}
+
+ \indent \textbf{Key Contributions:} We believe that our innovations and results provide strong preliminary evidence that such a hybrid model, where low resolution thermal imagery is used to detect the several thermal sources, can prove to be an attractive and practically viable alternative for building leakage and occupancy detection. The key contributions of our work are as follows.
+
+ \begin{itemize}
+ \item We develop an integrated thermal imaging system which is capable of capturing snippets of thermal images of wall surfaces. The system can rotate automatically in a pre-calibrated angle to capture continuous IR snapshots in small offsets. The system also has a digital camera which captures images of wall surface.
+
+ \item The second part of the system is the Image Reconstruction Unit. The IR images and the digital image is transferred to the external Image processing unit where the thermal images are stitched to get a panoramic image and then we detect - human body, cold surface and hot surface.
+ \end{itemize}
+
+ Rest of the paper is organized as follows. In Section 2 we present the overall architecture of the system. In Section 3 the different components of the imaging system and their detailed description.
