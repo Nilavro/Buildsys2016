@@ -2,35 +2,20 @@
 \label{sec:intro}
 
 It is estimated that energy wasted in 75,000 US homes in one year
-is equivalent to the energy loss due to the British Petroleum oil leakage~\cite{XX}. A portion of this energy wastage can
+is equivalent to the energy loss due to the British Petroleum oil spill calamity~\cite{XX}. A portion of this energy wastage can
 be attributed to callous use of appliances---open refrigerator doors,
-open microwave doors, and televisions and computer switched on when 
-there is no one in the room, and open doors and windows. The other portion can be attributed to poor insulation and leaky and drafty windows.
-While poor insulation can be addressed through energy audits, it is more
-challenging to determine wastage due to careless use of appliances and
-windows/doors. It requires continuous monitoring of such events
-using a low-cost non-intrusive sensing system.
+open microwave doors, televisions and computers switched on when 
+there is no one in the room, and open doors and windows. The other portion can be attributed to poor wall insulation as well as drafty doors and windows. While poor insulation can be detected using energy audits, it is more challenging to determine wastage due to careless use of appliances and
+windows/doors. To determine such wastage, continuous monitoring using a low-cost non-intrusive sensing system is required.
 
 A plausible solution to the problem is energy metering. Every appliance
-can be instrumented with energy meters and analytics on the energy
-consumption data can determine anamolous usage. Unfortunately, however,
-energy meters are usually expensive and blanket covering a home with energy
-meters can be prohibitively expensive. Energy disaggregation on data
-from a single point is another solution whose accuracy is limited if
-the number of appliances are large and the sampling rate is low~\cite{XX}
-To address this problem, in this paper, we present the design and preliminary
-evaluation of a low cost thermal imaging system that uses a single
-low resolution IR and RGB camera to determine energy consumption hotspots
-in a room.
+can be instrumented with an energy meter and analytics on the energy
+consumption data can determine appliance (mis-)use. Unfortunately, however,
+energy meters blanket covering a home with energy meters can be prohibitively expensive. Energy disaggregation on data
+from a single point measurement system is another solution 
+whose accuracy is limited if the number of appliances are large and the sampling rate is low~\cite{XX} To address this problem, in this paper, we present the design and preliminary evaluation of a low cost thermal imaging system that uses a single low resolution IR and RGB camera to determine energy consumption hotspots in a room.
 
-Our system, {\IRLeak} comprises the two cameras mounted on a steerable
-base and scans a room at a very low frequency. It then uses a combination
-of image stitching and image segmentation to determine temperature
-hotspots in the room. The system can overlay panoramic views of the thermal
-images with the digital images to provide a visualization of the energy
-hotspots in the room. It then uses pre-collected temperature profiles
-of different appliance surfaces to determine which appliance is being 
-used anamolously. The system can also determine the occupancy of the room. The overall systems costs only \$30, and a single camera suffices for a room. Through a preliminary evaluation using an experimental setup in the lab, we show that {\IRLeak} can accurately find open windows, doors, open refrigerator door, open microwave doors, and switched on computers and televisions. 
+Our system, {\IRLeak} comprises two cameras (IR and RGB) mounted on a steerable base. The system scans a room at a very low frequency. It then uses a combination of image stitching and image segmentation to determine clusters of temperature hotspots in the room. The system can overlay panoramic views of the thermal images with the digital images to provide a visualization of the hotspots. It then uses pre-collected temperature profiles of different surfaces (appliances, doors, windows, and walls) to determine which appliance is being used anamolously. The system can also determine the occupancy of the room. {\IRLeak} costs only \$30, and a single camera suffices for a room. Through a preliminary evaluation using an experimental setup in the lab, we show that {\IRLeak} can accurately find open windows and doors, open refrigerator door, open microwave door, and switched on computers and televisions. 
 
  
  
@@ -53,7 +38,7 @@ the following research contributions.
  
  \item {\bf Functional prototype and Evaluation}. We have developed a
  fully functional prototype of {\IRLeak} and present preliminary evaluation
- on the accuracy of detecting anomalous appliance use, human occupancy detection, and detecting open windows. We show, using a laboratory setup,
+ on the accuracy of detecting anomalous appliance use, human occupancy, and detecting open windows. We show, using a laboratory setup,
  that {\IRLeak} is highly accurate inspite of its simplicity.
 
 
