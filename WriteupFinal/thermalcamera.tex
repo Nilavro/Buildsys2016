@@ -5,11 +5,63 @@ In this section we describe the different components of our prototype {\it Therm
 
 \begin{figure}[!htb]
 \begin{center}
- \includegraphics[width=2.8in]{figs/FlowDiagram.pdf} 
+ \includegraphics[width=3.5in]{figs/FlowDiagram.pdf} 
  \caption{Thermal Imaging System Flow Diagram}
  \label{fig:Flow}
 \end{center}
 \end{figure}
+	
+	
+\begin{figure}[t!]
+	\begin{minipage}{0.00\textwidth}
+		\mbox{}
+	\end{minipage}
+	\begin{minipage}{0.48\textwidth}
+		\begin{center}
+			\scriptsize{
+				\fbox{\parbox{5cm}{\texttt{
+							\begin{tabbing}
+								\=Procedure IPU(Input: Individual set of baseline digital \\
+								\;\; images($D$) and corresponding thermal images ($I$)) \\
+								\> Output: Thermal Panoramic Image\\
+								1. \= Create panoramic image for the\\ 
+								\;\;baseline digital images using Hugin tool\\
+								2. \> Replace the digital images with the thermal images\\ 
+								\;\; and load the saved project again to construct the\\ 
+								\;\;panoramic thermal image\\
+								3. \> Employ High pass filter on the digital image \\
+								4. \> Employ Low pass filter on the IR image \\
+								5. \> Combine the two to get masked thermal image
+							\end{tabbing}}}}}
+							\caption{IPU procedure}
+							\label{algo:IPU}
+						\end{center}
+					\end{minipage} 
+\end{figure}
+				
+				
+\begin{figure}[t!]
+					\begin{minipage}{0.00\textwidth}
+						\mbox{}
+					\end{minipage}
+					\begin{minipage}{0.48\textwidth}
+						\begin{center}
+							\scriptsize{
+								\fbox{\parbox{5cm}{\texttt{
+											\begin{tabbing}
+												\=Procedure Hot and Cold Zone Segmentation(Input: \\Constructed panoramic thermal image ($I$)\\
+												\> Output: Matched Thermal Regions\\
+												1. \= Apply Otsu's thresholding\\
+												2. \> Find the contours of the hot and cold regions\\
+												3. \> Match the internal temperatures with the \\LIST OF SURFACE TEMPERATURES\\
+											\end{tabbing}}}}}
+											\caption{Thermal region identification: Two object case Hot and Cold}
+											\label{algo:Two Object}
+										\end{center}
+									\end{minipage}
+\end{figure}				
+	
+	
 	
 	
 \subsection{Camera Module}
@@ -63,29 +115,4 @@ We employ the digital stitching procedure to create the thermal panorama. We fir
 
 %Final part consist of merging the digital panoramic image with the thermal panoramic image. The process used is hybrid image construction, where the mask image or the thermal image is passed through a low pass filter and the digital image is passed through a high frequency filter and then the two images are combined. A complete procedure of the IPU have been described in Algorithm~\ref{algo:IPU}.
 
-\begin{figure}[!hp]
-	\begin{minipage}{0.00\textwidth}
-		\mbox{}
-	\end{minipage}
-	\begin{minipage}{0.48\textwidth}
-		\begin{center}
-			\scriptsize{
-				\fbox{\parbox{5cm}{\texttt{
-							\begin{tabbing}
-								\=Procedure IPU(Input: Individual set of baseline digital \\
-								\;\; images($D$) and corresponding thermal images ($I$)) \\
-								\> Output: Thermal Panoramic Image\\
-								1. \= Create panoramic image for the\\ 
-								\;\;baseline digital images using Hugin tool\\
-								2. \> Replace the digital images with the thermal images\\ 
-								\;\; and load the saved project again to construct the\\ 
-								\;\;panoramic thermal image\\
-								3. \> Employ High pass filter on the digital image \\
-								4. \> Employ Low pass filter on the IR image \\
-								5. \> Combine the two to get masked thermal image
-							\end{tabbing}}}}}
-							\caption{IPU procedure}
-							\label{algo:IPU}
-						\end{center}
-					\end{minipage} 
-				\end{figure}
+		
